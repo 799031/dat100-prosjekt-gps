@@ -7,6 +7,7 @@ import no.hvl.dat100ptc.oppgave1.GPSPoint;
 import no.hvl.dat100ptc.oppgave2.GPSData;
 import no.hvl.dat100ptc.oppgave2.GPSDataConverter;
 import no.hvl.dat100ptc.oppgave2.GPSDataFileReader;
+import no.hvl.dat100ptc.oppgave3.GPSUtils;
 import no.hvl.dat100ptc.oppgave4.GPSComputer;
 
 import javax.swing.JOptionPane;
@@ -44,13 +45,15 @@ public class ShowProfile extends EasyGraphics {
 
 	public void showHeightProfile(int ybase) {
 		
+		double elevationArr[] = GPSUtils.getElevation(gpspoints);
+		
 		int x = MARGIN; // første høyde skal tegnes ved MARGIN
-		int y;
-		
-		// TODO 
-		throw new UnsupportedOperationException(TODO.method());
-		
-
+		setColor(0, 0, 255);
+		for(int i=0; i<elevationArr.length; i++) {
+			drawLine(x, ybase, x, (int) (ybase - elevationArr[i]));
+			x += 3;
+		}
 	}
+	
 
 }

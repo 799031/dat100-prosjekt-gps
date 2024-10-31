@@ -9,16 +9,16 @@ public class GPSUtils {
 
 	public static double findMax(double[] da) {
 
-		double max; 
-		
+		double max;
+
 		max = da[0];
-		
+
 		for (double d : da) {
 			if (d > max) {
 				max = d;
 			}
 		}
-		
+
 		return max;
 	}
 
@@ -26,90 +26,120 @@ public class GPSUtils {
 
 		double min;
 
-		// TODO 
-		throw new UnsupportedOperationException(TODO.method());
-		
+		min = da[0];
+
+		for (double d : da) {
+			if (d < min) {
+				min = d;
+			}
+		}
+
+		return min;
 	}
 
 	public static double[] getLatitudes(GPSPoint[] gpspoints) {
 
-		throw new UnsupportedOperationException(TODO.method());
-		
-		// TODO
+		double latitudes[] = new double[gpspoints.length];
+
+		for (int i = 0; i < gpspoints.length; i++) {
+			latitudes[i] = gpspoints[i].getLatitude();
+		}
+
+		return latitudes;
 	}
 
 	public static double[] getLongitudes(GPSPoint[] gpspoints) {
 
-		
-		throw new UnsupportedOperationException(TODO.method());
-		
-		// TODO 
+		double longitudes[] = new double[gpspoints.length];
 
+		for (int i = 0; i < gpspoints.length; i++) {
+			longitudes[i] = gpspoints[i].getLongitude();
+		}
+
+		return longitudes;
+	}
+
+	public static double[] getElevation(GPSPoint[] gpspoints) {
+
+		double elevations[] = new double[gpspoints.length];
+
+		for (int i = 0; i < gpspoints.length; i++) {
+			elevations[i] = gpspoints[i].getElevation();
+		}
+
+		return elevations;
 	}
 
 	private static final int R = 6371000; // jordens radius
 
 	public static double distance(GPSPoint gpspoint1, GPSPoint gpspoint2) {
 
-		double d;
-		double latitude1, longitude1, latitude2, longitude2;
+		double latitude1 = toRadians(gpspoint1.getLatitude()), latitude2 = toRadians(gpspoint2.getLatitude()),
+				deltaLatitude = latitude2 - latitude1,
 
-		throw new UnsupportedOperationException(TODO.method());
+				deltaLongitude = toRadians(gpspoint2.getLongitude()) - toRadians(gpspoint1.getLongitude()),
 
-		// TODO 
-	}
-	
-	private static double compute_a(double phi1, double phi2, double deltaphi, double deltadelta) {
-	
-		throw new UnsupportedOperationException(TODO.method());
-		
-		// TODO 
+				a = pow(sin(deltaLatitude / 2), 2) + cos(latitude1) * cos(latitude2) * pow(sin(deltaLongitude / 2), 2),
+				c = 2 * atan2(sqrt(a), sqrt(1 - a));
 
+		return R * c;
 	}
 
-	private static double compute_c(double a) {
+	/*
+	 * private static double compute_a(double phi1, double phi2, double deltaphi,
+	 * double deltadelta) {
+	 * 
+	 * throw new UnsupportedOperationException(TODO.method());
+	 * 
+	 * // TODO
+	 * 
+	 * }
+	 * 
+	 * private static double compute_c(double a) {
+	 * 
+	 * throw new UnsupportedOperationException(TODO.method());
+	 * 
+	 * // TODO
+	 * 
+	 * }
+	 */
 
-		
-		throw new UnsupportedOperationException(TODO.method());
-		
-		
-		// TODO 
-
-	}
-
-	
 	public static double speed(GPSPoint gpspoint1, GPSPoint gpspoint2) {
 
-		int secs;
-		double speed;
-		
-		throw new UnsupportedOperationException(TODO.method());
-		
-		// TODO
+		int secs = gpspoint2.getTime() - gpspoint1.getTime();
+		double distance = distance(gpspoint1, gpspoint2);
 
+		return distance / (double) secs;
 	}
 
 	public static String formatTime(int secs) {
 
-		String timestr;
-		String TIMESEP = ":";
+		String timeTypes[] = new String[3];
+		timeTypes[0] = String.valueOf(secs / (60 * 60)); // hh
+		secs = secs % (60 * 60);
 
-		throw new UnsupportedOperationException(TODO.method());
-		
-		// TODO 
-		
+		timeTypes[1] = String.valueOf(secs / (60)); // mm
+		secs = secs % (60);
+
+		timeTypes[2] = String.valueOf(secs); // ss
+
+		for (int i = 0; i < 3; i++)
+			if (timeTypes[i].length() == 1)
+				timeTypes[i] = "0" + timeTypes[i];
+
+		String timestr = "  " + timeTypes[0] + ":" + timeTypes[1] + ":" + timeTypes[2];
+		return timestr;
 	}
-	
+
 	private static int TEXTWIDTH = 10;
 
 	public static String formatDouble(double d) {
 
-		String str;
+		String str = String.valueOf(Math.round(d * 100.0) / 100.0);
 
-		
-		throw new UnsupportedOperationException(TODO.method());
-		
-		// TODO
-		
+		while (str.length() < TEXTWIDTH)
+			str = " " + str;
+
+		return str;
 	}
 }

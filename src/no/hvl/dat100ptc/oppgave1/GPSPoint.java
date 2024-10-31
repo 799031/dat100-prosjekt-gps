@@ -4,73 +4,56 @@ import no.hvl.dat100ptc.TODO;
 
 public class GPSPoint {
 
-	// TODO - objektvariable
+	private int time;
+	private double latitude;
+	private double longitude;
+	private double elevation;
 	
-	public GPSPoint(int time, double latitude, double longitude, double elevation) {
+	public GPSPoint(int newTime, double newLatitude, double newLongitude, double newElevation) {
 
-		// TODO - konstruktur
-
-		throw new UnsupportedOperationException(TODO.construtor("GPSPoint"));
-		
+		setTime(newTime);
+		setLatitude(newLatitude);
+		setLongitude(newLongitude);
+		setElevation(newElevation);
 	}
 
-	// TODO - get/set metoder
-	public int getTime() {
-		
-		throw new UnsupportedOperationException(TODO.method());
-		
-	}
-
+	// set functions
 	public void setTime(int time) {
-				
-		throw new UnsupportedOperationException(TODO.method());
-		
-	}
-
-	public double getLatitude() {
-		
-		throw new UnsupportedOperationException(TODO.method());
-		
-		
+		this.time = time;
 	}
 
 	public void setLatitude(double latitude) {
-		
-		throw new UnsupportedOperationException(TODO.method());
-		
-	}
-
-	public double getLongitude() {
-		
-		throw new UnsupportedOperationException(TODO.method());
-		
+		this.latitude = latitude;
 	}
 
 	public void setLongitude(double longitude) {
-		
-		throw new UnsupportedOperationException(TODO.method());
-		
-	}
-
-	public double getElevation() {
-		
-		throw new UnsupportedOperationException(TODO.method());
-		
+		this.longitude = longitude;
 	}
 
 	public void setElevation(double elevation) {
-		
-		throw new UnsupportedOperationException(TODO.method());
-		
+		this.elevation = elevation;
 	}
-	
-	public String toString() {
-		
-		String str;
-		
-		throw new UnsupportedOperationException(TODO.method());
 
-		// TODO
-		
+	// get functions
+	public int getTime() {
+		return time;
+	}
+
+	public double getLatitude() {
+		return latitude;
+	}
+
+	public double getLongitude() {
+		return longitude;
+	}
+
+	public double getElevation() {
+		return elevation;
+	}
+
+	public String toString() {
+
+		String str = getTime() + " (" + getLatitude() + "," + getLongitude() + ") " + getElevation() + "\n";
+		return str;
 	}
 }
